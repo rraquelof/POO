@@ -2,7 +2,6 @@ from tkinter import *
 from customtkinter import *
 from tkintermapview import TkinterMapView
 
-#testanto se funciona
 
 window = Tk()
 window.geometry("900x550")
