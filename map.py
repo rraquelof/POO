@@ -1,6 +1,7 @@
-from tkinter import *
+#testes estranhos
 from customtkinter import *
 from tkintermapview import TkinterMapView
+from PIL import ImageTk, Image
 
 #import geocoder
 
@@ -8,17 +9,24 @@ from tkintermapview import TkinterMapView
 #print(g.latlng)
 #print(g.city)
 
+set_appearance_mode("Light")
 
 
-
-
-window = Tk()
+window = CTk()
 window.geometry("900x550")
 window.title("LOCALIZATION")
 font_sans=('Calibri',15)
 
 
+lista=[("Malta"),("Brasil"),("New York"),("China"),("Japan"),("Cajazeiras"),("Bangladesh")]
+lista2=[]
 
+def listagem(result):
+     for i in range(0, len(result), 3):
+        yield result[i:i + 3]
+    
+pages=list(listagem(lista))
+print(pages)
 
 def get_button(btn):
     if btn=="find":
@@ -33,14 +41,19 @@ def get_button(btn):
         map_save.grid(row = 0, column = 0,pady = 130,padx=70,sticky = "w")
 
 
-frame=CTkFrame(master=window,fg_color="blue",width=900, height=550)
-frame.place(relx=0.5, rely=0.5, anchor="center")
+
+frame=CTkFrame(master=window,width=900,height=550).place(relx=0.5, rely=0.5, anchor="center")
+photo_image=ImageTk.PhotoImage(Image.open("src/map.jpg"))
+
+
 
 map_widget = TkinterMapView(window, width=900, height=550)
 
-#map_widget.set_tile_server("http://a.tile.stamen.com/toner/{z}/{x}/{y}.png") 
-map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)  
-map_widget.set_address("Berlin Germany", marker=True)
+map_widget.set_tile_server("http://a.tile.stamen.com/toner/{z}/{x}/{y}.png") 
+#map_widget.set_tile_server("https://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}&s=Ga", max_zoom=22)  
+map_widget.set_address("Berlin Germany")
+
+
 
 
 l1=CTkLabel(master=window,text="teste1",fg_color="#010001", width=225, height=250,corner_radius=10,text_font=font_sans,justify="left",anchor="w")
@@ -62,8 +75,9 @@ entry_save=CTkEntry(master=window,placeholder_text="Save Address",corner_radius=
 
 
 #BUTTONS
-btn_find=CTkButton(master=window,text="Find Local",width=150,height=30,corner_radius=10,border_color="#010001",fg_color="#010001",hover_color="#1A1C1D",command=lambda which="find": get_button(which))
-btn_save=CTkButton(master=window,text="Save Local",width=150,height=30,corner_radius=10,border_color="#010001",fg_color="#010001",hover_color="#1A1C1D",command= lambda which="save": get_button(which))
+btn_find=CTkButton(master=window,text="Find Local",width=150,height=30,corner_radius=6,border_color="#010001",fg_color="#010001",hover_color="#1A1C1D",command=lambda which="find": get_button(which))
+btn_save=CTkButton(master=window,text="Save Local",width=150,height=30,corner_radius=6,border_color="#010001",fg_color="#010001",hover_color="#1A1C1D",command= lambda which="save": get_button(which))
+
 
 entry_address.place(x=275, y=400)
 entry_save.place(x=475, y=400)
@@ -72,9 +86,9 @@ btn_find.place(x=275,y=440)
 btn_save.place(x=475,y=440)
 
 
-print(entry_address.get())
 
 map_widget.place(relx=0.5, rely=0.5, anchor="center")
+#photo_image.place(relx=0.5, rely=0.5, anchor="center")
 
 
 
