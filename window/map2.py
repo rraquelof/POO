@@ -34,7 +34,7 @@ class Map:
             
             marker_1 = map_find.set_address("colosseo, rome, italy", marker=True)  #self.local.city
             marker_2=map_find.set_address("Berlin,Germany", marker=True)        #address_find
-            print(marker_1.position, marker_2.position)  # get position and text
+            print(marker_1.position, marker_2.position)  # get position 
             
             marker_1.set_text("Colosseo in Rome")   #self.local.city
             marker_2.set_text("Berlin Germany")   #adress_find
