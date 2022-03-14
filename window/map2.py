@@ -2,11 +2,13 @@
 from customtkinter import *
 from tkintermapview import TkinterMapView
 from tkinter import Listbox
+from database import DataBase
 #import geocoder
 
 class Map:
     set_appearance_mode("Light")
     def __init__(self):
+        self.database=DataBase()
         #self.local = geocoder.ip('me')
         
         self.lista=["Malta","Brasil","New York","China","Japan","Cajazeiras","Bangladesh"]
@@ -14,7 +16,7 @@ class Map:
 
 
         self.window=CTk()
-        self.window.geometry("900x520")
+        self.window.geometry("900x520+200+50")
         self.window.title("GEOLOCALIZATION")
         self.font_sans=("Calibri",15)
         self.frame()
@@ -58,6 +60,7 @@ class Map:
             #label_saved.configure(text=self.lista)
             list_box=Listbox(label_saved,relief=None,bg='#CECECF',selectbackground='#BFBEBF',bd=0,font=self.font_sans,highlightthickness = 0)
             address_save=entry_save.get()
+            self.database.adicionar(address_save)
             self.lista2.append(address_save)
             if self.lista2:
                 for address in self.lista2:
